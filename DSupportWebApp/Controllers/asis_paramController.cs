@@ -14,12 +14,16 @@ namespace DSupportWebApp.Controllers
     {
         private dsupportwebappEntities db = new dsupportwebappEntities();
 
+        public override Type GetAsisObjectModelType()
+        {
+            base.GetAsisObjectModelType();
+            return typeof(asis_param);
+        }
+
         // GET: asis_param
         public ActionResult Index()
         {
-           var result = View(db.asis_param.ToList());
-            //return base.Intialize(result);
-            return View();
+            return View(db.asis_param.ToList());
         }
 
         // GET: asis_param/Details/5
@@ -73,7 +77,7 @@ namespace DSupportWebApp.Controllers
                 return HttpNotFound();
             }
 
-            base.BeforeEdit(asis_param);
+            //base.BeforeEdit(asis_param);
 
             return View(asis_param);
         }
@@ -89,8 +93,8 @@ namespace DSupportWebApp.Controllers
             {
                 db.Entry(asis_param).State = EntityState.Modified;
                 db.SaveChanges();
-                base.AfterEdit(asis_param,1, Convert.ToInt32(Session["IDUser"]), "asis_param");
-               // return RedirectToAction("Index");
+                //base.AfterEdit(asis_param,1, Convert.ToInt32(Session["IDUser"]), "asis_param");
+                return RedirectToAction("Index");
             }
             return View(asis_param);
         }

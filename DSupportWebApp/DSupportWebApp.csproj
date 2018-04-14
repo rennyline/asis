@@ -275,6 +275,7 @@
       <DependentUpon>ModelDSupportWebApp.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\partial_asis_attmain.cs" />
+    <Compile Include="Models\partial_ModelDSupportWebApp.Context.cs" />
     <Compile Include="Models\partial_user_group.cs" />
     <Compile Include="Models\user_controller.cs">
       <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
