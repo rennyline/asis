@@ -1,0 +1,58 @@
+﻿@model DSupportWebApp.Models.asis_tablelog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>asis_tablelog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDAsisTableList)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDAsisTableList)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDAttRecordOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDAttRecordOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logchange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Logchange)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDAsisTableLog }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

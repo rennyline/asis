@@ -1,0 +1,74 @@
+﻿@model DSupportWebApp.Models.asis_param
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>asis_param</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyNL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyNL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDParam }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

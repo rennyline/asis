@@ -1,0 +1,6 @@
+﻿Generated model file: ModelDSupportWebApp.edmx.
+Loading metadata from the database took 00:00:01.0911711.
+Generating the model took 00:00:04.7766827.
+Generated model file: ModelDSupportWebApp.edmx.
+Loading metadata from the database took 00:00:01.7777315.
+Generating the model took 00:00:01.3580436.

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DSupportWebApp.Models.asis_tablelog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDAsisTableList)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDAttRecordOperation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOperation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logchange)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDAsisTableList)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDAttRecordOperation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOperation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Logchange)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDAsisTableLog }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDAsisTableLog }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDAsisTableLog })
+        </td>
+    </tr>
+}
+
+</table>

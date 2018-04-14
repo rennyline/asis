@@ -1,0 +1,98 @@
+﻿@model DSupportWebApp.Models.asis_tablelist
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>asis_tablelist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDAsisModule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDAsisModule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SortID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SortID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TableName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsMultiLingual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsMultiLingual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionNL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionNL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeModified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDAsisTableList }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

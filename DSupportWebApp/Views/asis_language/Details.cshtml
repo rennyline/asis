@@ -1,0 +1,106 @@
+﻿@model DSupportWebApp.Models.asis_language
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>asis_language</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameNL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameNL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SortID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SortID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlagFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlagFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Culture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Culture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPublished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDUserModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDUserModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeModified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDAsisLanguage }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

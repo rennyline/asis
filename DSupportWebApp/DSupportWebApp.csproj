@@ -46,13 +46,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -115,12 +125,6 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -190,28 +194,546 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsisBaseController.cs" />
+    <Compile Include="Controllers\AsisErrorController.cs" />
+    <Compile Include="Controllers\asis_attmainController.cs" />
+    <Compile Include="Controllers\asis_attsubController.cs" />
+    <Compile Include="Controllers\asis_languageController.cs" />
+    <Compile Include="Controllers\asis_messageController.cs" />
+    <Compile Include="Controllers\asis_moduleController.cs" />
+    <Compile Include="Controllers\asis_paramController.cs" />
+    <Compile Include="Controllers\asis_tablelogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\user_groupController.cs" />
+    <Compile Include="Controllers\user_listController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AsisModelHelper.cs" />
+    <Compile Include="Models\asis_attmain.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_attsub.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_controller.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_controllerview.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_controllerviewitem.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_controllerviewusergroup.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_help.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_language.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_menu.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_menuitem.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_message.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_module.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_param.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_tablelist.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\asis_tablelog.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelDSupportWebApp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDSupportWebApp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDSupportWebApp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDSupportWebApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDSupportWebApp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\partial_asis_attmain.cs" />
+    <Compile Include="Models\partial_user_group.cs" />
+    <Compile Include="Models\user_controller.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_controllerview.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_controllerviewitem.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_controllerviewusergroup.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_group.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_help.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_list.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_log.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_message.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_param.cs">
+      <DependentUpon>ModelDSupportWebApp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\asis_tablelistController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DSupportWebApp\404.html" />
+    <Content Include="Content\DSupportWebApp\500.html" />
+    <Content Include="Content\DSupportWebApp\article-v1.html" />
+    <Content Include="Content\DSupportWebApp\asset\css\bootstrap.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\jquery.ui.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\animate.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\bootstrap-material-datetimepicker.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\codemirror.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\datatables.bootstrap.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\dropzone.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\font-awesome.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\fullcalendar.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\handsontable.full.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\hover.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\all.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\aero%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\aero.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\aero.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\blue%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\blue.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\blue.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\flat%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\flat.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\flat.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\green%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\green.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\green.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\grey%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\grey.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\grey.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\orange%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\orange.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\orange.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\pink%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\pink.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\pink.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\purple%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\purple.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\purple.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\red%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\red.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\red.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\yellow%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\yellow.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\yellow.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\flat\_all.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\futurico\futurico%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\futurico\futurico.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\futurico\futurico.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\aero.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\blue.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\green.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\grey.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\line%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\line.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\line.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\orange.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\pink.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\purple.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\red.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\yellow.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\line\_all.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\aero%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\aero.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\aero.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\blue%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\blue.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\blue.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\green%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\green.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\green.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\grey%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\grey.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\grey.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\minimal%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\minimal.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\minimal.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\orange%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\orange.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\orange.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\pink%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\pink.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\pink.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\purple%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\purple.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\purple.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\red%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\red.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\red.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\yellow%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\yellow.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\yellow.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\minimal\_all.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\polaris\polaris%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\polaris\polaris.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\polaris\polaris.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\aero%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\aero.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\aero.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\blue%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\blue.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\blue.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\green%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\green.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\green.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\grey%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\grey.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\grey.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\orange%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\orange.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\orange.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\pink%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\pink.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\pink.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\purple%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\purple.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\purple.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\red%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\red.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\red.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\square%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\square.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\square.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\yellow%402x.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\yellow.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\yellow.png" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\icheck\skins\square\_all.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.skinModern.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.skinNice.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\ion.rangeSlider.skinSimple.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\ionrangeslider\normalize.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\jquery.steps.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\mediaelementplayer.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\normalize.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\nouislider.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\select2.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\simple-line-icons.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\spinkit.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\summernote.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\plugins\typebase.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\style - Copy %282%29.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\style.css" />
+    <Content Include="Content\DSupportWebApp\asset\css\style1.css" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\DSupportWebApp\asset\img\404.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\500.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\avatar.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\avatar2.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\avatar3.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\bg.svg" />
+    <Content Include="Content\DSupportWebApp\asset\img\bg1.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\bg2.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\bg3.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\bg4.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\bigplay.svg" />
+    <Content Include="Content\DSupportWebApp\asset\img\controls.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\controls.svg" />
+    <Content Include="Content\DSupportWebApp\asset\img\demo-video.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\DSupportLogo.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\img\g3986.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\left-bg.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\left-bg2.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\logomi.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\sprite-skin-flat.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\sprite-skin-modern.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\sprite-skin-nice.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\sprite-skin-simple.png" />
+    <Content Include="Content\DSupportWebApp\asset\img\ss.png" />
+    <Content Include="Content\DSupportWebApp\asset\js\bootstrap.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\jquery.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\jquery.ui.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\main.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\bootstrap-material-datetimepicker.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\chart.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\clipboard.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\codemirror.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\datatables.bootstrap.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\dropzone.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flashmediaelement.swf" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\annotating\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-interacting\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-multiple\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\date.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\background.png" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\basic-options\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\basic-usage\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\canvas\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\categories\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\examples.css" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\image\hs-2004-27-a-large-web.jpg" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\image\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\interacting\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\navigate\arrow-down.gif" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\navigate\arrow-left.gif" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\navigate\arrow-right.gif" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\navigate\arrow-up.gif" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\navigate\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\percentiles\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\realtime\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\resize\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\selection\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\series-errorbars\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\series-pie\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\series-toggle\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\series-types\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\shared\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\shared\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\stacking\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\symbols\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\threshold\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\tracking\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\visitors\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\zooming\index.html" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\excanvas.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\excanvas.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.colorhelpers.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.colorhelpers.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.canvas.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.canvas.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.categories.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.categories.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.crosshair.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.errorbars.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.errorbars.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.image.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.image.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.navigate.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.navigate.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.pie.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.resize.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.selection.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.selection.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.stack.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.stack.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.symbol.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.symbol.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.threshold.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.threshold.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.time.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.flot.time.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\jquery.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\LICENSE.txt" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\fullcalendar.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\handsontable.full.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\holder.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\html5shiv.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\icheck.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\ie9.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\ion.rangeSlider.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.datatables.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.flot.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.knob.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.mask.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.mobile-1.4.5.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.nicescroll.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.sparkline.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.steps.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.validate.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.vmap.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.vmap.sampledata.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\jquery.vmap.world.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.africa.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.asia.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.australia.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.europe.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.north-america.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\jquery.vmap.south-america.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\continents\readme.txt" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.algeria.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.argentina.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.brazil.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.europe.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.france.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.germany.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.greece.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.iran.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.iraq.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.russia.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.usa.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\maps\jquery.vmap.world.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\masonry.pkgd.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\mediaelement-and-player.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\moment.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\morris.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\nouislider.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\raphael.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\respond.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\select2.full.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\summernote.min.js" />
+    <Content Include="Content\DSupportWebApp\asset\media\demo.mp3" />
+    <Content Include="Content\DSupportWebApp\asset\media\demo.mp4" />
+    <Content Include="Content\DSupportWebApp\badges.html" />
+    <Content Include="Content\DSupportWebApp\boxed.html" />
+    <Content Include="Content\DSupportWebApp\buttons.html" />
+    <Content Include="Content\DSupportWebApp\calendar.html" />
+    <Content Include="Content\DSupportWebApp\chartjs.html" />
+    <Content Include="Content\DSupportWebApp\color.html" />
+    <Content Include="Content\DSupportWebApp\compose-mail.html" />
+    <Content Include="Content\DSupportWebApp\credits.html" />
+    <Content Include="Content\DSupportWebApp\dashboard-v1.html" />
+    <Content Include="Content\DSupportWebApp\dashboard-v2.html" />
+    <Content Include="Content\DSupportWebApp\datatables.html" />
+    <Content Include="Content\DSupportWebApp\fileupload.html" />
+    <Content Include="Content\DSupportWebApp\flot.html" />
+    <Content Include="Content\DSupportWebApp\forgotpass.html" />
+    <Content Include="Content\DSupportWebApp\formelement.html" />
+    <Content Include="Content\DSupportWebApp\handsontable.html" />
+    <Content Include="Content\DSupportWebApp\icons.html" />
+    <Content Include="Content\DSupportWebApp\index.html" />
+    <Content Include="Content\DSupportWebApp\invoice-v1.html" />
+    <Content Include="Content\DSupportWebApp\lockscreen-v1.html" />
+    <Content Include="Content\DSupportWebApp\login.html" />
+    <Content Include="Content\DSupportWebApp\mail-box.html" />
+    <Content Include="Content\DSupportWebApp\media.html" />
+    <Content Include="Content\DSupportWebApp\modal.html" />
+    <Content Include="Content\DSupportWebApp\morris.html" />
+    <Content Include="Content\DSupportWebApp\notifications.html" />
+    <Content Include="Content\DSupportWebApp\panels.html" />
+    <Content Include="Content\DSupportWebApp\price.html" />
+    <Content Include="Content\DSupportWebApp\productgrid.html" />
+    <Content Include="Content\DSupportWebApp\profile-v1.html" />
+    <Content Include="Content\DSupportWebApp\progress.html" />
+    <Content Include="Content\DSupportWebApp\reg.html" />
+    <Content Include="Content\DSupportWebApp\search-v1.html" />
+    <Content Include="Content\DSupportWebApp\sliders.html" />
+    <Content Include="Content\DSupportWebApp\sparkline.html" />
+    <Content Include="Content\DSupportWebApp\tablestatic.html" />
+    <Content Include="Content\DSupportWebApp\texteditor.html" />
+    <Content Include="Content\DSupportWebApp\timeline.html" />
+    <Content Include="Content\DSupportWebApp\topnav.html" />
+    <Content Include="Content\DSupportWebApp\typography.html" />
+    <Content Include="Content\DSupportWebApp\view-mail.html" />
+    <Content Include="Content\DSupportWebApp\weather.html" />
+    <Content Include="Content\DSupportWebApp\wizard.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelDSupportWebApp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDSupportWebApp.edmx</DependentUpon>
+      <LastGenOutput>ModelDSupportWebApp.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelDSupportWebApp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDSupportWebApp.edmx</DependentUpon>
+      <LastGenOutput>ModelDSupportWebApp.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\Asis_tinyMCE.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DSupportWebApp\asset\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\FontAwesome.otf" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\DSupportWebApp\asset\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth-1.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth-2.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth-3.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth-4.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth-5.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-eu-gdp-growth.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-japan-gdp-growth.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\ajax\data-usa-gdp-growth.json" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\africa" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\antarctica" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\asia" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\australasia" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\backward" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\etcetera" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\europe" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\factory" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\iso3166.tab" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\leapseconds" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\northamerica" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\pacificnew" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\solar87" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\solar88" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\solar89" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\southamerica" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\systemv" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\yearistype.sh" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\flot\examples\axes-time-zones\tz\zone.tab" />
+    <Content Include="Content\DSupportWebApp\asset\js\plugins\silverlightmediaelement.xap" />
+    <Content Include="Content\DSupportWebApp\LICENSE" />
+    <Content Include="Content\DSupportWebApp\README.md" />
+    <EntityDeploy Include="Models\ModelDSupportWebApp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDSupportWebApp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelDSupportWebApp.edmx.diagram">
+      <DependentUpon>ModelDSupportWebApp.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -224,6 +746,148 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\css\prism.css" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\items.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_arrow.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_check.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\progress.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\tabs.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\tiny_mce_popup.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\editable_selects.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\form_utils.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\mctabs.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\validate.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\help\img\logo.png" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\toc\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\toc\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.mobile.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.mobile.min.css" />
+    <Content Include="Scripts\tinymce\themes\inlite\theme.js" />
+    <Content Include="Scripts\tinymce\themes\inlite\theme.min.js" />
+    <Content Include="Scripts\tinymce\themes\mobile\theme.js" />
+    <Content Include="Scripts\tinymce\themes\mobile\theme.min.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -234,7 +898,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -258,9 +921,71 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\asis_param\Create.cshtml" />
+    <Content Include="Views\asis_param\Delete.cshtml" />
+    <Content Include="Views\asis_param\Details.cshtml" />
+    <Content Include="Views\asis_param\Edit.cshtml" />
+    <Content Include="Views\asis_param\Index.cshtml" />
+    <Content Include="Views\Shared\AsisError.cshtml" />
+    <Content Include="Views\asis_language\Create.cshtml" />
+    <Content Include="Views\asis_language\Delete.cshtml" />
+    <Content Include="Views\asis_language\Details.cshtml" />
+    <Content Include="Views\asis_language\Edit.cshtml" />
+    <Content Include="Views\asis_language\Index.cshtml" />
+    <Content Include="Views\user_list\Create.cshtml" />
+    <Content Include="Views\user_list\Delete.cshtml" />
+    <Content Include="Views\user_list\Details.cshtml" />
+    <Content Include="Views\user_list\Edit.cshtml" />
+    <Content Include="Views\user_list\Index.cshtml" />
+    <Content Include="Views\user_group\Create.cshtml" />
+    <Content Include="Views\user_group\Delete.cshtml" />
+    <Content Include="Views\user_group\Details.cshtml" />
+    <Content Include="Views\user_group\Edit.cshtml" />
+    <Content Include="Views\user_group\Index.cshtml" />
+    <Content Include="Views\asis_message\Create.cshtml" />
+    <Content Include="Views\asis_message\Delete.cshtml" />
+    <Content Include="Views\asis_message\Details.cshtml" />
+    <Content Include="Views\asis_message\Edit.cshtml" />
+    <Content Include="Views\asis_message\Index.cshtml" />
+    <Content Include="Views\asis_tablelog\Create.cshtml" />
+    <Content Include="Views\asis_tablelog\Delete.cshtml" />
+    <Content Include="Views\asis_tablelog\Details.cshtml" />
+    <Content Include="Views\asis_tablelog\Edit.cshtml" />
+    <Content Include="Views\asis_tablelog\Index.cshtml" />
+    <Content Include="Views\asis_module\Create.cshtml" />
+    <Content Include="Views\asis_module\Delete.cshtml" />
+    <Content Include="Views\asis_module\Details.cshtml" />
+    <Content Include="Views\asis_module\Edit.cshtml" />
+    <Content Include="Views\asis_module\Index.cshtml" />
+    <Content Include="Views\asis_tablelist\Create.cshtml" />
+    <Content Include="Views\asis_tablelist\Delete.cshtml" />
+    <Content Include="Views\asis_tablelist\Details.cshtml" />
+    <Content Include="Views\asis_tablelist\Edit.cshtml" />
+    <Content Include="Views\asis_tablelist\Index.cshtml" />
+    <Content Include="Views\asis_attmain\Create.cshtml" />
+    <Content Include="Views\asis_attmain\Delete.cshtml" />
+    <Content Include="Views\asis_attmain\Details.cshtml" />
+    <Content Include="Views\asis_attmain\Edit.cshtml" />
+    <Content Include="Views\asis_attmain\Index.cshtml" />
+    <Content Include="Views\asis_attsub\Create.cshtml" />
+    <Content Include="Views\asis_attsub\Delete.cshtml" />
+    <Content Include="Views\asis_attsub\Details.cshtml" />
+    <Content Include="Views\asis_attsub\Edit.cshtml" />
+    <Content Include="Views\asis_attsub\Index.cshtml" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
+    <Content Include="Scripts\tinymce\langs\readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AsisBase\" />
+    <Folder Include="Views\AsisError\" />
+    <Folder Include="Views\TinyMCE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -274,6 +999,15 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AsisLabrary\AsisLibrary.csproj">
+      <Project>{f3cd136b-6308-4ee1-9d56-f2aec2cf95e9}</Project>
+      <Name>AsisLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
